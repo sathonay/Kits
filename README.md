@@ -10,6 +10,7 @@ TODO
 -
 
 - Add a cooldown
+- Add permission for a kit
 
 Requirements
 -
