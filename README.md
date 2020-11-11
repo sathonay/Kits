@@ -6,8 +6,13 @@ Kits a simple kit plugin using my core
 
 ![Kits inventory](https://imgur.com/S5tNCyy.png)
 
+TODO
+-
+
+- Add a cooldown
+
 Requirements
-------------
+-
 
 To build Kits, the following will need to be installed and available from your shell:
 
