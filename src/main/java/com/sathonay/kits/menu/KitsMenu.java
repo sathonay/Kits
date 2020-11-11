@@ -37,29 +37,4 @@ public class KitsMenu extends Menu {
     public void update() {
         kitsHandler.values().forEach(kit -> addItem(kit.getIcon(), (PlayerAction) kit::giveToPlayer));
     }
-
-    public void addItem(ItemStack itemStack) {
-        addItem(itemStack, null);
-    }
-
-    public void addItem(ItemStack itemStack, Action action) {
-        Inventory inventory = getInventory();
-        if (inventory == null) return;
-
-        int firstValidSlot = getRows() * 9  + 1;
-
-        ItemStack[] contents = inventory.getContents();
-
-        for (int slot = 0; slot < contents.length; slot++) {
-            ItemStack stack = contents[slot];
-            if (stack == null || stack.getType() == Material.AIR) {
-                firstValidSlot = slot;
-                break;
-            }
-        }
-
-        if (!isInInventory(firstValidSlot)) return;
-        if (Objects.isNull(action)) setItem(firstValidSlot, itemStack);
-        else setItem(firstValidSlot, itemStack, action);
-    }
 }
