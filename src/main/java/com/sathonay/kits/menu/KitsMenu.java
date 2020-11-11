@@ -9,6 +9,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Objects;
+
 public class KitsMenu extends Menu {
 
     private final KitsHandler kitsHandler;
@@ -56,8 +58,8 @@ public class KitsMenu extends Menu {
             }
         }
 
-        if (isInInventory(firstValidSlot))
-        if (action == null) setItem(firstValidSlot, itemStack);
+        if (!isInInventory(firstValidSlot)) return;
+        if (Objects.isNull(action)) setItem(firstValidSlot, itemStack);
         else setItem(firstValidSlot, itemStack, action);
     }
 }
