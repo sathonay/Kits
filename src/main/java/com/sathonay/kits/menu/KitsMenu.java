@@ -5,6 +5,7 @@ import com.sathonay.core.menu.actions.Action;
 import com.sathonay.core.menu.actions.PlayerAction;
 import com.sathonay.kits.handler.KitsHandler;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -29,12 +30,19 @@ public class KitsMenu extends Menu {
     @Override
     public void onClick(InventoryClickEvent event) {
         super.onClick(event);
-        event.getWhoClicked().closeInventory();
-        update();
     }
 
     @Override
     public void update() {
-        kitsHandler.values().forEach(kit -> addItem(kit.getIcon(), (PlayerAction) kit::giveToPlayer));
+        kitsHandler.values().forEach(kit -> addItem(kit.getIcon(), (KitMenuAction) kit::giveToPlayer));
+    }
+
+    public interface KitMenuAction extends PlayerAction {
+        @Override
+        default void onClick(InventoryClickEvent event) {
+            Player player = (Player) event.getWhoClicked();
+            player.closeInventory();
+            onClick(player);
+        }
     }
 }
