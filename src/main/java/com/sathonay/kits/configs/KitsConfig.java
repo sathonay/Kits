@@ -44,14 +44,13 @@ public class KitsConfig extends Config {
         super.load(file);
 
         getKeys(false).forEach(kitName -> {
-            String displayName = getChatColorTranslateString(kitName + ".displayname");
+            //String displayName = getChatColorTranslateString(kitName + ".displayname");
             ItemStack icon = (ItemStack) get(kitName + ".icon");
             //ItemStack[] armorContents = getList(kitName + ".armor").toArray(new ItemStack[0]);
             ItemStack[] contents = getList(kitName + ".contents").toArray(new ItemStack[0]);
 
-            kitsHandler.put(kitName, new Kit(displayName, icon/*, armorContents*/, contents));
+            kitsHandler.putIfAbsent(kitName, new Kit(icon/*, armorContents*/, contents));
         });
-
     }
 
     @Override
@@ -59,7 +58,7 @@ public class KitsConfig extends Config {
 
         kitsHandler.forEach((key, kit) -> {
             String path = key + ".";
-            set(path + "displayname", CC.revertTranslate(kit.getDisplayName()));
+            //set(path + "displayname", CC.revertTranslate(kit.getDisplayName()));
             set(path + "icon", kit.getIcon());
             //set(path + "armor", kit.getArmorContents());
             set(path + "contents", kit.getContents());

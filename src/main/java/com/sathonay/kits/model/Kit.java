@@ -9,36 +9,43 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Objects;
 
 @Data
 @RequiredArgsConstructor
 public class Kit {
 
-    private String displayName;
     private ItemStack icon = new ItemStack(Material.DIAMOND_SWORD, 1);
     private ItemStack[] /*armorContents,*/ contents;
 
-    public Kit(String displayName, ItemStack icon/*, ItemStack[] armorContents*/, ItemStack[] contents) {
+    public Kit(ItemStack icon/*, ItemStack[] armorContents*/, ItemStack[] contents) {
         this.icon = icon;
-        this.setDisplayName(displayName);
         /*this.armorContents = armorContents;*/
         this.contents = contents;
     }
 
-    public Kit(String displayName/*, ItemStack[] armorContents*/, ItemStack[] contents) {
+    public Kit(/*, ItemStack[] armorContents*/ ItemStack[] contents) {
         /*this.armorContents = armorContents;*/
-        this.setDisplayName(displayName);
         this.contents = contents;
     }
 
     public void setIcon(ItemStack icon) {
+        if (this.icon.hasItemMeta()) {
+            ItemMeta newIconMeta = icon.getItemMeta();
+            String displayName = this.icon.getItemMeta().getDisplayName();
+            if (Objects.nonNull(displayName)) newIconMeta.setDisplayName(displayName);
+            icon.setItemMeta(newIconMeta);
+        }
         this.icon = icon;
-        this.setDisplayName(this.displayName);
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = CC.translate(displayName);
-        this.icon = new ItemBuilder(this.icon).setName(this.displayName).toItemStack();
+    public Kit setDisplayName(String displayName) {
+        ItemMeta newIconMeta = icon.getItemMeta();
+        newIconMeta.setDisplayName(displayName);
+        icon.setItemMeta(newIconMeta);
+        return this;
     }
 
     public void giveToPlayer(Player player) {
