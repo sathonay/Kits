@@ -21,7 +21,7 @@ public class KitSetIconCommand extends KitSubCommand{
             return;
         }
 
-        kit.setIcon(item);
+        kit.setIcon(item.clone());
         kitsHandler.saveUpdates();
         player.sendMessage(ChatColor.GREEN + "The icon of the kit was updated.");
     }
