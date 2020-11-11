@@ -1,0 +1,6 @@
+name: Kits
+author: sathonay
+version: 1.0.0
+main: com.sathonay.kits.KitsPlugin
+depend:
+  - Core
