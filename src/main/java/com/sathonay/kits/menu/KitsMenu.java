@@ -40,6 +40,7 @@ public class KitsMenu extends Menu {
     public interface KitMenuAction extends PlayerAction {
         @Override
         default void onClick(InventoryClickEvent event) {
+            event.setCancelled(true); // precautionary measure (thanks google trad) ^^
             Player player = (Player) event.getWhoClicked();
             player.closeInventory();
             onClick(player);
