@@ -15,16 +15,16 @@ public class KitsHandler extends HashMap<String, Kit> {
     }
 
     @Override
-    public Kit put(String key, Kit value) {
-        Kit kit = putIfAbsent(key, value);
-        if (Objects.isNull(kit)) config.save();
+    public Kit putIfAbsent(String key, Kit value) {
+        Kit kit = super.putIfAbsent(key, value);
+        if (Objects.isNull(kit)) saveUpdates();
         return kit;
     }
 
     @Override
     public Kit remove(Object key) {
         Kit kit = super.remove(key);
-        if (Objects.nonNull(kit)) config.save();
+        if (Objects.nonNull(kit)) saveUpdates();
         return kit;
     }
 
