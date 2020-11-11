@@ -49,12 +49,14 @@ public class KitsConfig extends Config {
             //ItemStack[] armorContents = getList(kitName + ".armor").toArray(new ItemStack[0]);
             ItemStack[] contents = getList(kitName + ".contents").toArray(new ItemStack[0]);
 
-            kitsHandler.putIfAbsent(kitName, new Kit(icon/*, armorContents*/, contents));
+            kitsHandler.put(kitName, new Kit(icon/*, armorContents*/, contents));
         });
     }
 
     @Override
     public boolean save() {
+
+        clear(); // clear config before saving
 
         kitsHandler.forEach((key, kit) -> {
             String path = key + ".";
