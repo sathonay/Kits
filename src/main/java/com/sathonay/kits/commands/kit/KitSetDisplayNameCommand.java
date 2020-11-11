@@ -19,7 +19,7 @@ public class KitSetDisplayNameCommand extends KitSubCommand{
         for (int argIndex = 2; argIndex < args.length; argIndex++) {
             displayNameJoiner.add(args[argIndex]);
         }
-        kit.setDisplayName(CC.translate(displayNameJoiner.toString()));
+        kit.setDisplayName(displayNameJoiner.toString());
         player.sendMessage(ChatColor.GREEN + "The display-name of the kit was updated.");
     }
 }

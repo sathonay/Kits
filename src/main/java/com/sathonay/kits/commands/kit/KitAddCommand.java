@@ -7,6 +7,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.Objects;
+
 public class KitAddCommand extends SubCommandPlayer {
     private final KitsHandler kitsHandler;
     public KitAddCommand(KitsHandler kitsHandler) {
@@ -18,8 +20,8 @@ public class KitAddCommand extends SubCommandPlayer {
     public void execute(Player player, String[] args, String label) {
 
         PlayerInventory inventory = player.getInventory();
-        Kit kit = kitsHandler.put(args[1], new Kit(args[1]/*, inventory.getArmorContents()*/, inventory.getContents()));
-        if (kit == null) player.sendMessage(ChatColor.GREEN + "Kit created.");
+        Kit kit = kitsHandler.putIfAbsent(args[1], new Kit(/*, inventory.getArmorContents()*/ inventory.getContents()).setDisplayName(args[1]));
+        if (Objects.nonNull(kit)) player.sendMessage(ChatColor.GREEN + "Kit created.");
         else player.sendMessage(ChatColor.RED + "This kit already exist");
     }
 }

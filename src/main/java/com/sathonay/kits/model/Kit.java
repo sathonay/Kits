@@ -43,7 +43,7 @@ public class Kit {
 
     public Kit setDisplayName(String displayName) {
         ItemMeta newIconMeta = icon.getItemMeta();
-        newIconMeta.setDisplayName(displayName);
+        newIconMeta.setDisplayName(CC.translate(displayName));
         icon.setItemMeta(newIconMeta);
         return this;
     }
