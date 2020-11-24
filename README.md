@@ -1,6 +1,6 @@
 # Kits
 
-Kits a simple kit plugin using my core
+Kits is a simple kit plugin using my core
 
 ![Kit command](https://imgur.com/27S4HFd.png)
 
