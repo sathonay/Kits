@@ -1,6 +1,6 @@
 package com.sathonay.kits.commands.kit;
 
-import com.sathonay.kits.handler.KitsHandler;
+import com.sathonay.kits.manager.KitsManager;
 import com.sathonay.kits.model.Kit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class KitSetIconCommand extends KitSubCommand{
-    public KitSetIconCommand(KitsHandler kitsHandler) {
-        super("kit seticon <kit>", kitsHandler, "seticon");
+    public KitSetIconCommand(KitsManager kitsManager) {
+        super("kit seticon <kit>", kitsManager, "seticon");
     }
 
     @Override
@@ -22,7 +22,7 @@ public class KitSetIconCommand extends KitSubCommand{
         }
 
         kit.setIcon(item.clone());
-        kitsHandler.saveUpdates();
+        kitsManager.saveUpdates();
         player.sendMessage(ChatColor.GREEN + "The icon of the kit was updated.");
     }
 }

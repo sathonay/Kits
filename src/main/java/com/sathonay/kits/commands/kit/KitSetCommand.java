@@ -1,14 +1,14 @@
 package com.sathonay.kits.commands.kit;
 
-import com.sathonay.kits.handler.KitsHandler;
+import com.sathonay.kits.manager.KitsManager;
 import com.sathonay.kits.model.Kit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
 public class KitSetCommand extends KitSubCommand{
-    public KitSetCommand(KitsHandler kitsHandler) {
-        super("kit set <kit>", kitsHandler, "kit");
+    public KitSetCommand(KitsManager kitsManager) {
+        super("kit set <kit>", kitsManager, "kit");
     }
 
     @Override
@@ -16,7 +16,7 @@ public class KitSetCommand extends KitSubCommand{
         PlayerInventory inventory = player.getInventory();
         //kit.setArmorContents(inventory.getArmorContents());
         kit.setContents(inventory.getContents());
-        kitsHandler.saveUpdates();
+        kitsManager.saveUpdates();
         player.sendMessage(ChatColor.GREEN + "The kit content was updated.");
     }
 }

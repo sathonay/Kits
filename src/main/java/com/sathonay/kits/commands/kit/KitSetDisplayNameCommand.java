@@ -1,7 +1,7 @@
 package com.sathonay.kits.commands.kit;
 
 import com.sathonay.core.api.util.CC;
-import com.sathonay.kits.handler.KitsHandler;
+import com.sathonay.kits.manager.KitsManager;
 import com.sathonay.kits.model.Kit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -9,8 +9,8 @@ import org.bukkit.entity.Player;
 import java.util.StringJoiner;
 
 public class KitSetDisplayNameCommand extends KitSubCommand{
-    public KitSetDisplayNameCommand(KitsHandler kitsHandler) {
-        super("kit setDisplayName <kit> <displayname>", kitsHandler, "setdisplayname");
+    public KitSetDisplayNameCommand(KitsManager kitsManager) {
+        super("kit setDisplayName <kit> <displayname>", kitsManager, "setdisplayname");
     }
 
     @Override

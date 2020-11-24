@@ -5,7 +5,7 @@ import com.sathonay.core.api.config.Config;
 import com.sathonay.core.api.util.CC;
 import com.sathonay.kits.commands.KitCommand;
 import com.sathonay.kits.commands.KitsCommand;
-import com.sathonay.kits.handler.KitsHandler;
+import com.sathonay.kits.manager.KitsManager;
 import com.sathonay.kits.menu.KitsMenu;
 import com.sathonay.kits.model.Kit;
 
@@ -16,12 +16,12 @@ import java.io.File;
 import java.io.IOException;
 public class KitsConfig extends Config {
     private final ACore core;
-    private final KitsHandler kitsHandler;
+    private final KitsManager kitsManager;
 
     public KitsConfig(ACore plugin) {
         super(plugin, "kits.yml");
         this.core = plugin;
-        this.kitsHandler = new KitsHandler(this);
+        this.kitsManager = new KitsManager(this);
     }
 
     @Override
@@ -29,11 +29,11 @@ public class KitsConfig extends Config {
 
         Config config = super.loadConfig();
 
-        core.getMenus().registerMenus(new KitsMenu("Kits", 6, kitsHandler));
+        core.getMenus().registerMenus(new KitsMenu("Kits", 6, kitsManager));
 
         core.registerCommands(
                 new KitsCommand(core.getMenus()),
-                new KitCommand(kitsHandler)
+                new KitCommand(kitsManager)
         );
 
         return config;
@@ -49,7 +49,7 @@ public class KitsConfig extends Config {
             //ItemStack[] armorContents = getList(kitName + ".armor").toArray(new ItemStack[0]);
             ItemStack[] contents = getList(kitName + ".contents").toArray(new ItemStack[0]);
 
-            kitsHandler.put(kitName, new Kit(icon/*, armorContents*/, contents));
+            kitsManager.put(kitName, new Kit(icon/*, armorContents*/, contents));
         });
     }
 
@@ -58,7 +58,7 @@ public class KitsConfig extends Config {
 
         clear(); // clear config before saving
 
-        kitsHandler.forEach((key, kit) -> {
+        kitsManager.forEach((key, kit) -> {
             String path = key + ".";
             //set(path + "displayname", CC.revertTranslate(kit.getDisplayName()));
             set(path + "icon", kit.getIcon());

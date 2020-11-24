@@ -1,4 +1,4 @@
-package com.sathonay.kits.handler;
+package com.sathonay.kits.manager;
 
 import com.sathonay.core.api.config.IConfig;
 import com.sathonay.kits.model.Kit;
@@ -6,11 +6,11 @@ import com.sathonay.kits.model.Kit;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class KitsHandler extends HashMap<String, Kit> {
+public class KitsManager extends HashMap<String, Kit> {
 
     private final IConfig config;
 
-    public KitsHandler(IConfig config) {
+    public KitsManager(IConfig config) {
         this.config = config;
     }
 

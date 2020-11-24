@@ -3,22 +3,17 @@ package com.sathonay.kits.menu;
 import com.sathonay.core.menu.Menu;
 import com.sathonay.core.menu.actions.Action;
 import com.sathonay.core.menu.actions.PlayerAction;
-import com.sathonay.kits.handler.KitsHandler;
-import org.bukkit.Material;
+import com.sathonay.kits.manager.KitsManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.Objects;
 
 public class KitsMenu extends Menu {
 
-    private final KitsHandler kitsHandler;
+    private final KitsManager kitsManager;
 
-    public KitsMenu(String title, int rows, KitsHandler kitsHandler) {
+    public KitsMenu(String title, int rows, KitsManager kitsManager) {
         super(title, rows);
-        this.kitsHandler = kitsHandler;
+        this.kitsManager = kitsManager;
     }
 
     @Override
@@ -34,7 +29,7 @@ public class KitsMenu extends Menu {
 
     @Override
     public void update() {
-        kitsHandler.values().forEach(kit -> addItem(kit.getIcon(), (KitMenuAction) kit::giveToPlayer));
+        kitsManager.values().forEach(kit -> addItem(kit.getIcon(), (KitMenuAction) kit::giveToPlayer));
     }
 
     public interface KitMenuAction extends PlayerAction {
