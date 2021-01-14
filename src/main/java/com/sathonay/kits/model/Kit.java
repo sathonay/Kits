@@ -1,12 +1,10 @@
 package com.sathonay.kits.model;
 
 import com.sathonay.core.api.util.CC;
-import com.sathonay.core.api.util.ItemBuilder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,11 +17,13 @@ public class Kit {
 
     private ItemStack icon = new ItemStack(Material.DIAMOND_SWORD, 1);
     private ItemStack[] /*armorContents,*/ contents;
+    private String permission;
 
-    public Kit(ItemStack icon/*, ItemStack[] armorContents*/, ItemStack[] contents) {
+    public Kit(ItemStack icon/*, ItemStack[] armorContents*/, ItemStack[] contents, String permission) {
         this.icon = icon;
         /*this.armorContents = armorContents;*/
         this.contents = contents;
+        this.permission = permission;
     }
 
     public Kit(/*, ItemStack[] armorContents*/ ItemStack[] contents) {

@@ -1,15 +1,16 @@
 package com.sathonay.kits.commands.kit;
 
 import com.google.common.collect.Lists;
-import com.sathonay.core.api.command.SubCommandPlayer;
+import com.sathonay.core.api.command.SubCommand;
 import com.sathonay.kits.manager.KitsManager;
 import com.sathonay.kits.model.Kit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public abstract class KitSubCommand extends SubCommandPlayer {
+public abstract class KitSubCommand extends SubCommand {
     protected final KitsManager kitsManager;
     public KitSubCommand(String syntax, KitsManager kitsManager, String... names)  {
         super(syntax, names);
@@ -17,18 +18,22 @@ public abstract class KitSubCommand extends SubCommandPlayer {
     }
 
     @Override
-    public void execute(Player player, String[] args, String label) {
+    public void execute(CommandSender sender, String[] args, String label) {
 
         String kitName = args[1];
         if (!kitsManager.containsKey(kitName)) {
-            player.sendMessage("Kit not found");
+            sender.sendMessage("Kit not found");
             return;
         }
 
-        execute(player, args, label, kitsManager.get(kitName));
+        execute(sender, args, label, kitsManager.get(kitName));
+        if (sender instanceof Player) execute((Player) sender, args, label, kitsManager.get(kitName));
+        kitsManager.saveUpdates();
     }
 
-    public abstract void execute(Player player, String[] args, String label, Kit kit);
+    public void execute(Player player, String[] args, String label, Kit kit) {}
+
+    public void execute(CommandSender sender, String[] args, String label, Kit kit) {}
 
     @Override
     public List<String> tabComplete(CommandSender sender, String alias, String[] args) {

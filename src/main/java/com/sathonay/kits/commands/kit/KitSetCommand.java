@@ -6,9 +6,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
-public class KitSetCommand extends KitSubCommand{
+public class KitSetCommand extends KitSubCommand {
     public KitSetCommand(KitsManager kitsManager) {
-        super("kit set <kit>", kitsManager, "kit");
+        super("kit set <kit>", kitsManager, "set");
     }
 
     @Override
@@ -16,7 +16,6 @@ public class KitSetCommand extends KitSubCommand{
         PlayerInventory inventory = player.getInventory();
         //kit.setArmorContents(inventory.getArmorContents());
         kit.setContents(inventory.getContents());
-        kitsManager.saveUpdates();
         player.sendMessage(ChatColor.GREEN + "The kit content was updated.");
     }
 }

@@ -49,7 +49,7 @@ public class KitsConfig extends Config {
             //ItemStack[] armorContents = getList(kitName + ".armor").toArray(new ItemStack[0]);
             ItemStack[] contents = getList(kitName + ".contents").toArray(new ItemStack[0]);
 
-            kitsManager.put(kitName, new Kit(icon/*, armorContents*/, contents));
+            kitsManager.put(kitName, new Kit(icon/*, armorContents*/, contents, getString(kitName + ".permission", null)));
         });
     }
 
@@ -64,6 +64,7 @@ public class KitsConfig extends Config {
             set(path + "icon", kit.getIcon());
             //set(path + "armor", kit.getArmorContents());
             set(path + "contents", kit.getContents());
+            set(path + "permission", kit.getPermission());
         });
 
         return super.save();

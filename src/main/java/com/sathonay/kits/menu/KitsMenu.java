@@ -4,6 +4,8 @@ import com.sathonay.core.menu.Menu;
 import com.sathonay.core.menu.actions.Action;
 import com.sathonay.core.menu.actions.PlayerAction;
 import com.sathonay.kits.manager.KitsManager;
+import com.sathonay.kits.model.Kit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
@@ -29,7 +31,12 @@ public class KitsMenu extends Menu {
 
     @Override
     public void update() {
-        kitsManager.values().forEach(kit -> addItem(kit.getIcon(), (KitMenuAction) kit::giveToPlayer));
+        kitsManager.values().forEach(kit -> addItem(kit.getIcon(), (KitMenuAction) player -> giveToPlayer(kit, player)));
+    }
+
+    private void giveToPlayer(Kit kit, Player player) {
+        if (kit.getPermission() != null && !player.hasPermission(kit.getPermission())) player.sendMessage(ChatColor.RED + "You don't have the permission for this kit.");
+        else kit.giveToPlayer(player);
     }
 
     public interface KitMenuAction extends PlayerAction {

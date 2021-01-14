@@ -11,9 +11,12 @@ public class KitCommand extends ParentCommand {
         registerSubCommands(
                 new KitAddCommand(kitsManager),
                 new KitRemoveCommand(kitsManager),
+                new KitRemovePermissionCommand(kitsManager),
                 new KitSetCommand(kitsManager),
                 new KitSetIconCommand(kitsManager),
                 new KitSetDisplayNameCommand(kitsManager),
+                new KitSetPermssionCommand(kitsManager),
+                new KitInfoCommand(kitsManager),
                 new KitListCommand(kitsManager)
         );
     }

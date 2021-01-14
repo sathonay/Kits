@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class KitSetIconCommand extends KitSubCommand{
     public KitSetIconCommand(KitsManager kitsManager) {
-        super("kit seticon <kit>", kitsManager, "seticon");
+        super("kit setIcon <kit>", kitsManager, "setIcon");
     }
 
     @Override
@@ -22,7 +22,6 @@ public class KitSetIconCommand extends KitSubCommand{
         }
 
         kit.setIcon(item.clone());
-        kitsManager.saveUpdates();
         player.sendMessage(ChatColor.GREEN + "The icon of the kit was updated.");
     }
 }
